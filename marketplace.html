@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buyer Marketplace — AGROCONNECT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header id="siteHeader"></header>
+
+  <main>
+    <section class="page-banner">
+      <div class="container">
+        <span class="pill pill-green">Real-Time Supply · Smart Matching · Multi-Seller Procurement</span>
+        <h1>Buyer Waste Marketplace</h1>
+        <p>Search verified agricultural waste across Banana Stem, Lotus Stem, Sugarcane Bagasse, and Coconut Husk—ranked by distance, landed cost, and match score.</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:36px;">
+      <div class="container">
+        <!-- Search & Filter Bar -->
+        <div class="card card-pad" style="margin-bottom:24px;">
+          <div class="grid-filter-bar">
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="filterSearch">Search Waste or Supplier</label>
+              <input class="form-control" id="filterSearch" placeholder="Search title, city, condition..." />
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="filterCategory">Category</label>
+              <select class="form-control" id="filterCategory">
+                <option value="">All Categories</option>
+                <option value="Banana Stem">Banana Stem</option>
+                <option value="Lotus Stem">Lotus Stem</option>
+                <option value="Sugarcane Bagasse">Sugarcane Bagasse</option>
+                <option value="Coconut Husk">Coconut Husk</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="filterQuality">Quality</label>
+              <select class="form-control" id="filterQuality">
+                <option value="">Any Quality</option>
+                <option value="Grade A">Grade A</option>
+                <option value="Grade B">Grade B</option>
+                <option value="Industrial">Industrial</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="filterHub">Your Delivery City</label>
+              <select class="form-control" id="filterHub"></select>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="filterSort">Sort By</label>
+              <select class="form-control" id="filterSort">
+                <option value="match">Smart Match Score</option>
+                <option value="distance">Nearest Distance</option>
+                <option value="priceAsc">Lowest Price / kg</option>
+                <option value="landedAsc">Lowest Landed Cost</option>
+                <option value="stockDesc">Highest Stock</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;padding-top:14px;border-top:1px solid var(--border);">
+            <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
+              <label class="text-sm" style="font-weight:600;">Max Price/kg: <span class="mono" id="maxPriceLabel">₹80</span>
+                <input type="range" id="filterMaxPrice" min="5" max="80" value="80" style="vertical-align:middle;margin-left:6px;" />
+              </label>
+              <label class="text-sm" style="font-weight:600;">Max Distance: <span class="mono" id="maxDistLabel">1,200 km</span>
+                <input type="range" id="filterMaxDist" min="50" max="1200" step="50" value="1200" style="vertical-align:middle;margin-left:6px;" />
+              </label>
+            </div>
+
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <button type="button" class="btn btn-outline btn-sm" id="openCompareBtn">Compare Sellers</button>
+              <button type="button" class="btn btn-leaf btn-sm" id="toggleProcurementBtn">Multi-Seller Bulk Procurement</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Multi-Seller Bulk Procurement Panel -->
+        <div class="card card-pad" id="procurement" hidden style="margin-bottom:28px;background:linear-gradient(180deg,#ffffff 0%,#eefaf0 100%);border-color:var(--leaf-500);">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:14px;">
+            <div>
+              <span class="section-kicker">MULTI-SELLER PROCUREMENT ENGINE</span>
+              <h2 style="margin:0;color:var(--forest-900);">Fulfill Large Industrial Orders Across Multiple Suppliers</h2>
+              <p class="text-sm text-muted" style="margin:4px 0 0;">Need more tonnage than a single farm holds? Enter your target quantity to auto-allocate across verified nearby sellers.</p>
+            </div>
+            <button type="button" class="btn btn-ghost btn-sm" id="closeProcBtn">Hide</button>
+          </div>
+
+          <div class="grid-proc-bar">
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="procCategory">Category</label>
+              <select class="form-control" id="procCategory">
+                <option value="Banana Stem">Banana Stem</option>
+                <option value="Lotus Stem">Lotus Stem</option>
+                <option value="Sugarcane Bagasse">Sugarcane Bagasse</option>
+                <option value="Coconut Husk">Coconut Husk</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="procQty">Required Quantity (kg)</label>
+              <input class="form-control" type="number" id="procQty" min="500" step="500" value="6000" />
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="procPriority">Optimize By</label>
+              <select class="form-control" id="procPriority">
+                <option value="price">Lowest Landed Cost</option>
+                <option value="distance">Shortest Distance</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-primary" id="runProcBtn">Generate Plan</button>
+          </div>
+
+          <div id="procResult" style="margin-top:18px;"></div>
+        </div>
+
+        <!-- Product Grid -->
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+          <div class="text-sm text-muted" id="marketplaceCount">Loading listings...</div>
+          <span class="pill pill-green">Live Sync Enabled</span>
+        </div>
+
+        <div class="grid-3" id="marketplaceGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Price Comparison Modal -->
+  <div id="compareModal" class="modal-backdrop" hidden>
+    <div class="modal-panel" style="max-width:820px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+        <div>
+          <span class="section-kicker">SIDE-BY-SIDE BENCHMARK</span>
+          <h2 style="margin:0;color:var(--forest-900);">Seller Price &amp; Landed Cost Comparison</h2>
+        </div>
+        <button type="button" class="btn btn-ghost btn-sm" id="closeCompareBtn">✕</button>
+      </div>
+      <div class="form-group" style="max-width:280px;">
+        <label for="compareCatSelect">Select Waste Category</label>
+        <select class="form-control" id="compareCatSelect">
+          <option value="Banana Stem">Banana Stem</option>
+          <option value="Lotus Stem">Lotus Stem</option>
+          <option value="Sugarcane Bagasse">Sugarcane Bagasse</option>
+          <option value="Coconut Husk">Coconut Husk</option>
+        </select>
+      </div>
+      <div class="table-wrap" id="compareTableWrap"></div>
+    </div>
+  </div>
+
+  <footer id="siteFooter"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/geo-service.js"></script>
+  <script src="js/matching-service.js"></script>
+  <script src="js/db-service.js"></script>
+  <script src="js/ui-shell.js"></script>
+  <script src="js/pages/marketplace.js"></script>
+</body>
+</html>

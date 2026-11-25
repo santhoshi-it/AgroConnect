@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upload Agricultural Waste — AGROCONNECT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header id="siteHeader"></header>
+
+  <main>
+    <section class="page-banner">
+      <div class="container">
+        <span class="pill pill-green">Real-Time Marketplace Publishing</span>
+        <h1>Upload Agricultural Waste Lot</h1>
+        <p>Publish your biomass inventory with photos, quality grade, farm location, and availability dates. Listings appear instantly on the Buyer Marketplace.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div id="uploadSellerNotice" class="card card-pad" hidden style="margin-bottom:24px;background:var(--warning-soft);border-color:#e9c46a;">
+          <strong>Sign in as a Seller:</strong> Please log in with a Seller account so this listing is linked to your farm or cooperative.
+          <a href="auth.html" class="btn btn-primary btn-sm" style="margin-left:10px;">Go to Seller Login</a>
+        </div>
+
+        <div class="grid-2" style="align-items:start;">
+          <form class="card card-pad" id="uploadWasteForm">
+            <h2 style="margin-top:0;color:var(--forest-900);">Lot Specifications</h2>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="wasteCategory">Waste Category</label>
+                <select class="form-control" id="wasteCategory" required>
+                  <option value="Banana Stem">Banana Stem</option>
+                  <option value="Lotus Stem">Lotus Stem</option>
+                  <option value="Sugarcane Bagasse">Sugarcane Bagasse</option>
+                  <option value="Coconut Husk">Coconut Husk</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="wasteQuality">Quality Grade</label>
+                <select class="form-control" id="wasteQuality" required>
+                  <option value="Grade A">Grade A (Export / Textile Ready)</option>
+                  <option value="Grade B">Grade B (Standard Fiber / Pulp)</option>
+                  <option value="Industrial">Industrial Bulk</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="wasteTitle">Listing Title</label>
+              <input class="form-control" id="wasteTitle" required placeholder="e.g. Sun-Dried Banana Pseudostem Fiber Bundles" />
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="wasteQuantity">Available Quantity (kg)</label>
+                <input class="form-control" type="number" id="wasteQuantity" min="50" required placeholder="2500" />
+              </div>
+              <div class="form-group">
+                <label for="wastePrice">Price per kg (₹)</label>
+                <input class="form-control" type="number" step="0.5" id="wastePrice" min="1" required placeholder="16.5" />
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="wasteCondition">Condition / Processing</label>
+                <select class="form-control" id="wasteCondition" required>
+                  <option value="Sun-Dried & Decorticated">Sun-Dried &amp; Decorticated</option>
+                  <option value="Fresh Harvested">Fresh Harvested</option>
+                  <option value="Fresh Shredded">Fresh Shredded</option>
+                  <option value="Baled & Depithed">Baled &amp; Depithed</option>
+                  <option value="Retted & Sun-Dried">Retted &amp; Sun-Dried</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="wasteDate">Availability Date</label>
+                <input class="form-control" type="date" id="wasteDate" required />
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="wasteLocation">Farm / Hub Location</label>
+                <select class="form-control" id="wasteLocation"></select>
+              </div>
+              <div class="form-group">
+                <label for="wasteMonthlyCap">Monthly Supply Capacity (kg/mo)</label>
+                <input class="form-control" type="number" id="wasteMonthlyCap" min="100" value="4000" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="wasteImageInput">Upload Product Photograph (JPG / PNG)</label>
+              <input class="form-control" type="file" id="wasteImageInput" accept="image/*" />
+              <span class="text-xs text-muted">If no file is chosen, a verified high-resolution category photograph will be attached automatically.</span>
+            </div>
+
+            <div class="form-group">
+              <label for="wasteDescription">Description &amp; Industrial Notes</label>
+              <textarea class="form-control" id="wasteDescription" placeholder="Describe moisture level, fiber length, baling format, and loading access..."></textarea>
+            </div>
+
+            <div style="display:flex;gap:10px;align-items:center;">
+              <button type="button" class="btn btn-outline btn-sm" id="useMyGpsBtn">Detect My GPS Location</button>
+              <span class="text-xs mono text-muted" id="gpsStatusLabel">Lat: 11.3410, Lng: 77.7172</span>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg btn-full" style="margin-top:18px;" id="publishWasteBtn">
+              Publish to Live Marketplace
+            </button>
+          </form>
+
+          <!-- Live Listing Card Preview -->
+          <div style="display:flex;flex-direction:column;gap:18px;">
+            <div class="card card-pad">
+              <span class="section-kicker">LIVE CARD PREVIEW</span>
+              <div class="card product-card" style="margin-top:12px;">
+                <div class="product-thumb">
+                  <img id="previewImg" src="assets/images/banana-stem.jpg" alt="Waste Preview" />
+                  <span class="pill pill-green product-thumb-badge" id="previewCat">Banana Stem</span>
+                </div>
+                <div class="product-body">
+                  <h3 class="product-title" id="previewTitle">Sun-Dried Banana Pseudostem Fiber Bundles</h3>
+                  <div class="product-price-row">
+                    <span class="price-tag" id="previewPrice">₹16.5 / kg</span>
+                    <span class="text-xs text-muted" id="previewQty">2,500 kg available</span>
+                  </div>
+                  <div class="product-specs">
+                    <span class="pill pill-neutral" id="previewQuality">Grade A</span>
+                    <span class="pill pill-earth" id="previewCondition">Sun-Dried &amp; Decorticated</span>
+                  </div>
+                  <div class="text-xs text-muted" id="previewLoc">Location: Erode, TN</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card card-pad" style="background:var(--leaf-50);">
+              <h4 style="margin:0 0 8px;color:var(--forest-900);">Instant Buyer Visibility</h4>
+              <p class="text-sm text-muted" style="margin:0;">
+                Publishing immediately updates the Buyer Marketplace, Smart Supplier Matching engine, and Multi-Seller Procurement pools in real time.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="siteFooter"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/geo-service.js"></script>
+  <script src="js/matching-service.js"></script>
+  <script src="js/db-service.js"></script>
+  <script src="js/ui-shell.js"></script>
+  <script src="js/pages/upload-waste.js"></script>
+</body>
+</html>

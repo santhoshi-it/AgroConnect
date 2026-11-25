@@ -1,0 +1,11 @@
+/home /index.html 200
+/marketplace /marketplace.html 200
+/auth /auth.html 200
+/login /auth.html 200
+/signup /auth.html 200
+/seller-dashboard /seller-dashboard.html 200
+/upload-waste /upload-waste.html 200
+/product-details /product-details.html 200
+/logistics /logistics.html 200
+/cart /cart.html 200
+/profile /profile.html 200

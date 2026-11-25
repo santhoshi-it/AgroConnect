@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seller Dashboard — AGROCONNECT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header id="siteHeader"></header>
+
+  <main>
+    <section class="page-banner">
+      <div class="container" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;">
+        <div>
+          <span class="pill pill-green">Supplier Operations</span>
+          <h1>Seller Dashboard</h1>
+          <p id="sellerGreeting">Manage your agricultural waste listings, live stock levels, incoming industrial orders, and earnings.</p>
+        </div>
+        <a href="upload-waste.html" class="btn btn-leaf btn-lg">+ Upload New Waste Lot</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div id="sellerAuthGate" class="card card-pad" hidden style="margin-bottom:24px;background:var(--warning-soft);border-color:#e9c46a;">
+          <strong>Seller Account Required:</strong> You are currently browsing without a seller session.
+          <a href="auth.html" class="btn btn-primary btn-sm" style="margin-left:10px;">Login / Switch to Seller</a>
+        </div>
+
+        <!-- KPIs -->
+        <div class="grid-4" style="margin-bottom:32px;">
+          <div class="card kpi-card">
+            <span class="kpi-label">Active Listings</span>
+            <span class="kpi-value" id="kpiListings">0</span>
+          </div>
+          <div class="card kpi-card">
+            <span class="kpi-label">Available Stock</span>
+            <span class="kpi-value" id="kpiStock">0 kg</span>
+          </div>
+          <div class="card kpi-card">
+            <span class="kpi-label">Incoming Orders</span>
+            <span class="kpi-value" id="kpiOrders">0</span>
+          </div>
+          <div class="card kpi-card">
+            <span class="kpi-label">Total Earnings</span>
+            <span class="kpi-value" id="kpiEarnings">₹0</span>
+          </div>
+        </div>
+
+        <!-- Uploaded Products -->
+        <div class="card card-pad" style="margin-bottom:28px;">
+          <div class="section-header" style="margin-bottom:18px;">
+            <div>
+              <h2 style="margin:0;color:var(--forest-900);">My Uploaded Waste Listings</h2>
+              <p class="text-sm text-muted" style="margin:4px 0 0;">Stock updates sync automatically with the Buyer Marketplace.</p>
+            </div>
+            <a href="upload-waste.html" class="btn btn-outline btn-sm">+ Add Lot</a>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Category</th>
+                  <th>Price / kg</th>
+                  <th>Available Stock</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="sellerProductsBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Incoming Orders -->
+        <div class="card card-pad">
+          <div class="section-header" style="margin-bottom:18px;">
+            <div>
+              <h2 style="margin:0;color:var(--forest-900);">Industrial Buyer Orders</h2>
+              <p class="text-sm text-muted" style="margin:4px 0 0;">Dispatch shipments and update live delivery tracking for buyers.</p>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Buyer</th>
+                  <th>Items &amp; Qty</th>
+                  <th>Revenue</th>
+                  <th>Status</th>
+                  <th>Update Status</th>
+                </tr>
+              </thead>
+              <tbody id="sellerOrdersBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Quick Edit Stock/Price Modal -->
+  <div id="editProductModal" class="modal-backdrop" hidden>
+    <div class="modal-panel" style="max-width:460px;">
+      <h3 style="margin-top:0;color:var(--forest-900);">Update Listing Stock &amp; Price</h3>
+      <form id="editProductForm">
+        <input type="hidden" id="editProdId" />
+        <div class="form-group">
+          <label for="editProdPrice">Price per kg (₹)</label>
+          <input class="form-control" type="number" step="0.5" min="1" id="editProdPrice" required />
+        </div>
+        <div class="form-group">
+          <label for="editProdStock">Available Quantity (kg)</label>
+          <input class="form-control" type="number" min="0" id="editProdStock" required />
+        </div>
+        <div class="form-group">
+          <label for="editProdStatus">Listing Status</label>
+          <select class="form-control" id="editProdStatus">
+            <option value="active">Active (Visible in Marketplace)</option>
+            <option value="archived">Paused / Archived</option>
+          </select>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:10px;">
+          <button type="button" class="btn btn-outline" id="cancelEditProd">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer id="siteFooter"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/geo-service.js"></script>
+  <script src="js/matching-service.js"></script>
+  <script src="js/db-service.js"></script>
+  <script src="js/ui-shell.js"></script>
+  <script src="js/pages/seller-dashboard.js"></script>
+</body>
+</html>

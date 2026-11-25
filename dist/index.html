@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AGROCONNECT — Agricultural Waste Marketplace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header id="siteHeader"></header>
+
+  <main>
+    <!-- Welcome Banner / Hero -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="pill pill-green">Circular Bio-Economy · Location-Based Exchange</span>
+          <h1 class="hero-title">
+            Turn Agricultural Residue into <span>Industrial Gold</span>.
+          </h1>
+          <p class="hero-lead">
+            AgroConnect connects rural farmers and agricultural cooperatives directly with textile mills, bio-packaging plants, and pulp manufacturers—powered by smart supplier matching and live logistics.
+          </p>
+          <div class="hero-actions">
+            <a href="marketplace.html" class="btn btn-primary btn-lg">Explore Marketplace</a>
+            <a href="upload-waste.html" class="btn btn-outline btn-lg">Sell Agricultural Waste</a>
+            <a href="auth.html" class="btn btn-earth btn-lg">Seller / Buyer Login</a>
+          </div>
+          <div class="hero-stats">
+            <div>
+              <span class="hero-stat-val" id="homeStatLots">--</span>
+              <span class="hero-stat-lbl">Active Supply Lots</span>
+            </div>
+            <div>
+              <span class="hero-stat-val" id="homeStatTons">--</span>
+              <span class="hero-stat-lbl">Tons Available</span>
+            </div>
+            <div>
+              <span class="hero-stat-val">4 Belts</span>
+              <span class="hero-stat-lbl">Verified Agri-Hubs</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-photo-main">
+            <img src="assets/images/farmer-hero.jpg" alt="Farmer inspecting natural extracted plant fibers" />
+            <span class="photo-caption">Verified Rural Suppliers · Direct Farm-Gate Pricing</span>
+          </div>
+          <div class="hero-photo-sub">
+            <img src="assets/images/eco-textile.jpg" alt="Eco textiles and kraft packaging made from agricultural waste" />
+            <span class="photo-caption">Eco-Textiles &amp; Packaging</span>
+          </div>
+          <div class="hero-photo-sub">
+            <img src="assets/images/banana-stem.jpg" alt="Fresh banana pseudostems stacked on farm" />
+            <span class="photo-caption">Raw Biomass Supply</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Waste Categories -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="section-kicker">PRIMARY FEEDSTOCKS</span>
+            <h2 class="section-title">Main Agricultural Waste Categories</h2>
+          </div>
+          <a href="marketplace.html" class="btn btn-outline">View All Listings →</a>
+        </div>
+
+        <div class="grid-4" id="homeCategoriesGrid"></div>
+      </div>
+    </section>
+
+    <!-- Featured Products (Auto-updates when sellers upload) -->
+    <section class="section section-cream">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="section-kicker">LIVE SUPPLY FEED</span>
+            <h2 class="section-title">Featured Industrial Waste Lots</h2>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <a href="marketplace.html#procurement" class="btn btn-leaf btn-sm">Multi-Seller Bulk Planner</a>
+            <a href="logistics.html" class="btn btn-outline btn-sm">Check Transport Rates</a>
+          </div>
+        </div>
+
+        <div class="grid-3" id="homeFeaturedGrid"></div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="section section-white">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <span class="section-kicker">END-TO-END WORKFLOW</span>
+            <h2 class="section-title">How AgroConnect Works</h2>
+          </div>
+        </div>
+
+        <div class="grid-4">
+          <article class="card card-pad">
+            <span class="pill pill-green">01 · Farmers Upload</span>
+            <h3 style="margin:12px 0 8px;color:var(--forest-900);">List Harvest Residue</h3>
+            <p class="text-sm text-muted" style="margin:0;">Farmers upload photos, weight in kg, moisture condition, grade, farm coordinates, and availability date.</p>
+          </article>
+          <article class="card card-pad">
+            <span class="pill pill-earth">02 · Smart Matching</span>
+            <h3 style="margin:12px 0 8px;color:var(--forest-900);">Compare &amp; Match</h3>
+            <p class="text-sm text-muted" style="margin:0;">Buyers filter by landed cost, compare multiple sellers side-by-side, or split large tonnage across nearby suppliers.</p>
+          </article>
+          <article class="card card-pad">
+            <span class="pill pill-green">03 · Route &amp; Freight</span>
+            <h3 style="margin:12px 0 8px;color:var(--forest-900);">Location &amp; Logistics</h3>
+            <p class="text-sm text-muted" style="margin:0;">Google Maps distance calculation estimates exact pickup truck tiers, transport cost, and arrival time.</p>
+          </article>
+          <article class="card card-pad">
+            <span class="pill pill-earth">04 · Track &amp; Transform</span>
+            <h3 style="margin:12px 0 8px;color:var(--forest-900);">Industrial Upcycling</h3>
+            <p class="text-sm text-muted" style="margin:0;">Real-time order tracking from farm pickup to factory gate—turning waste into textiles, paper, and composites.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Industrial Transformation Showcase -->
+    <section class="section">
+      <div class="container">
+        <div class="card card-pad grid-impact" style="background:linear-gradient(135deg,#ffffff 0%,#eefaf0 100%);">
+          <div>
+            <span class="section-kicker">CIRCULAR IMPACT</span>
+            <h2 class="section-title">From Farm Surplus to Sustainable Textiles &amp; Packaging</h2>
+            <p class="text-muted">
+              Every ton of banana stem, lotus stem, sugarcane bagasse, and coconut husk sourced through AgroConnect prevents open-field burning, adds secondary income for rural growers, and lowers raw material costs for green manufacturers.
+            </p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px;">
+              <a href="marketplace.html" class="btn btn-primary">Start Sourcing Now</a>
+              <a href="auth.html" class="btn btn-outline">Register as Supplier</a>
+            </div>
+          </div>
+          <div style="border-radius:16px;overflow:hidden;height:280px;border:1px solid var(--border);">
+            <img src="assets/images/eco-textile.jpg" alt="Sustainable textiles and biodegradable packaging from farm waste" style="width:100%;height:100%;object-fit:cover;" />
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="siteFooter"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/geo-service.js"></script>
+  <script src="js/matching-service.js"></script>
+  <script src="js/db-service.js"></script>
+  <script src="js/ui-shell.js"></script>
+  <script src="js/pages/home.js"></script>
+</body>
+</html>
